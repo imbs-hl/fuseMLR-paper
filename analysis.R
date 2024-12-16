@@ -141,8 +141,9 @@ for (nam in 1:length(nams)) {
                          meta_layer_id = "meta_layer",
                          lrner_package = NULL,
                          lrn_fct = "mylasso",
-                         param_train_list = list(),
-                         param_pred_list = list(na_rm = FALSE),
+                         param_train_list = list(nlambda = 25,
+                                                 nfolds = 10),
+                         param_pred_list = list(),
                          na_action = "na.keep")
     
     # Testing
@@ -163,13 +164,13 @@ for (nam in 1:length(nams)) {
     
     # Create RNA layer.
     createTestLayer(testing = testing,
-                    train_layer_id = "RNA",
-                    train_data = testing_mirna)
+                    test_layer_id = "RNA",
+                    test_data = testing_mirna)
     
     # Create mutation layer.
     createTestLayer(testing = testing,
-                    train_layer_id = "Mutation",
-                    train_data = testing_mirna)
+                    test_layer_id = "Mutation",
+                    test_data = testing_mirna)
     
     
     # Train
@@ -195,7 +196,7 @@ for (nam in 1:length(nams)) {
     saveRDS(
       object = fold_list,
       file = file.path(result_dir,
-                       sprintf("%s_50fold%02d.rds",
+                       sprintf("%s_fold%02d.rds",
                                nams[nam],
                                current_fold))
     )
@@ -210,15 +211,7 @@ result_dir <- "/imbs/home/fouodo/projects/interconnect-publications/fusemlr/TCGA
 all_res <- list()
 for (nam in 1:length(nams)) {
   message(sprintf("Omics data: %s\n", nams[nam]))
-  # load(file.path(data_dir, sprintf("%s.RData", nams[nam])))
-  # Crossvalidation folds for benchmarking
-  # target_df <- data.frame(ID = surdata$bcr_patient_barcode,
-  #                         mutation = mutationdata$TP53_mutation)
-  # Remove target from mutation modality
-  # mutationdata$TP53_mutation <- NULL
-  # Start cross-validation for benchmarking
   set.seed(seeds[nam])
-  # bench_folds <- caret::createFolds(y = target_df$sex, k = 10L)
   perf_list <- lapply(X = 1L:10L, FUN = function(current_fold){
     # Save the fold
     tmp_res <- readRDS(
