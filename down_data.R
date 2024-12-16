@@ -1,3 +1,6 @@
+# install.packages("OpenML")
+# install.packages("farff")
+
 library(OpenML)
 library(farff)
 
