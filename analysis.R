@@ -22,7 +22,7 @@ source(file.path(project_dir, "mylasso.R"))
 source(file.path(project_dir, "mysvm.R"))
 
 nams <- c("BLCA", "HNSC")
-seeds <- c(42282, 42303)
+seeds <- c(422852, 342303)
 
 for (nam in 1:length(nams)) {
   message(sprintf("Omics data: %s\n", nams[nam]))
@@ -107,7 +107,7 @@ for (nam in 1:length(nams)) {
     # Create RNA layer.
     createTrainLayer(training = training,
                      train_layer_id = "RNA",
-                     train_data = training_mirna,
+                     train_data = training_rna,
                      varsel_package = "Boruta",
                      varsel_fct = "Boruta",
                      varsel_param = list(num.trees = 2500L,
@@ -123,7 +123,7 @@ for (nam in 1:length(nams)) {
     # Create mutation layer.
     createTrainLayer(training = training,
                      train_layer_id = "Mutation",
-                     train_data = training_mirna,
+                     train_data = training_mutation,
                      varsel_package = "Boruta",
                      varsel_fct = "Boruta",
                      varsel_param = list(num.trees = 2500L,
@@ -165,12 +165,12 @@ for (nam in 1:length(nams)) {
     # Create RNA layer.
     createTestLayer(testing = testing,
                     test_layer_id = "RNA",
-                    test_data = testing_mirna)
+                    test_data = testing_rna)
     
     # Create mutation layer.
     createTestLayer(testing = testing,
                     test_layer_id = "Mutation",
-                    test_data = testing_mirna)
+                    test_data = testing_mutation)
     
     
     # Train
@@ -207,41 +207,22 @@ for (nam in 1:length(nams)) {
 
 # Performance estimation
 #TODO: remove this line later
-result_dir <- "/imbs/home/fouodo/projects/interconnect-publications/fusemlr/TCGA/results"
-all_res <- list()
+result_dir <- "/imbs/home/fouodo/projects/interconnect-publications/fuseMLR-paper/results"
+all_res_list <- list()
 for (nam in 1:length(nams)) {
   message(sprintf("Omics data: %s\n", nams[nam]))
-  set.seed(seeds[nam])
   perf_list <- lapply(X = 1L:10L, FUN = function(current_fold){
     # Save the fold
     tmp_res <- readRDS(
       file.path(result_dir,
-                sprintf("%s_50fold%02d.rds",
+                sprintf("%s_fold%02d.rds",
                         nams[nam],
                         current_fold))
     )
     tmp_res <- tmp_res$pred_truth
     brier_score <- sapply(3:7, function (layer) {
-      # clin_brier <- mean(((tmp_res[ , "Clinical"]) - tmp_res[ , 9])^2)
-      # cnv_brier <- mean(((tmp_res[ , "CNV"]) - tmp_res[ , 9])^2)
-      # mirna_brier <- mean(((tmp_res[ , "MiRNA"]) - tmp_res[ , 9])^2)
-      # rna_brier <- mean(((tmp_res[ , "RNA"]) - tmp_res[ , 9])^2)
-      # mutation_brier <- mean(((tmp_res[ , "Mutation"]) - tmp_res[ , 9])^2)
-      # meta_brier <- mean((tmp_res[ , "meta_layer"] - tmp_res[ , 9])^2)
-      # brier_score <- c(clin_brier,
-      #                  cnv_brier,
-      #                  mirna_brier,
-      #                  rna_brier,
-      #                  mutation_brier,
-      #                  meta_brier)
       tmp_brier1 <- mean((tmp_res[ , layer] - tmp_res[ , 8])^2)
       tmp_brier2 <- mean(((1- tmp_res[ , layer]) - tmp_res[ , 8])^2)
-      # return(c(clin_brier,
-      #           cnv_brier,
-      #           mirna_brier,
-      #           rna_brier,
-      #           mutation_brier,
-      #           meta_brier))
       return(min(tmp_brier1, tmp_brier2))
     })
     names(brier_score) <- names(tmp_res)[3:7]
@@ -252,28 +233,21 @@ for (nam in 1:length(nams)) {
   perf_long <- data.table::melt(data = perf_list,
                                 id.vars = "Data",
                                 variable.name = "Modality")
-  all_res[[nam]] <- perf_long
+  all_res_list[[nam]] <- perf_long
   
 }
-all_res_list <- all_res
+all_res <- all_res_list
 all_res <- do.call(what = "rbind", args = all_res)
 all_res$Method <- ""
 # all_res[all_res$Modality == "Clinical", "Method"] <- "RF"
 all_res[all_res$Modality == "CNV", "Method"] <- "RF"
-all_res[all_res$Modality == "MiRNA", "Method"] <- "SVM"
+all_res[all_res$Modality == "MiRNA", "Method"] <- "RF"
 all_res[all_res$Modality == "RNA", "Method"] <- "SVM"
 all_res[all_res$Modality == "Mutation", "Method"] <- "SVM"
 all_res[all_res$Modality == "Meta_layer", "Method"] <- "LASSO"
 all_res$Method <- factor(x = all_res$Method, levels = c("RF", "SVM", "LASSO"))
 
 # Plot results
-all_res$Method <- ""
-all_res[all_res$Modality == "Clinical", "Method"] <- "RF"
-all_res[all_res$Modality == "CNV", "Method"] <- "RF"
-all_res[all_res$Modality == "MiRNA", "Method"] <- "SVM"
-all_res[all_res$Modality == "RNA", "Method"] <- "SVM"
-all_res[all_res$Modality == "Mutation", "Method"] <- "SVM"
-all_res[all_res$Modality == "Meta_layer", "Method"] <- "LASSO"
 all_res$Method <- factor(all_res$Method)
 all_res$Data <- factor(all_res$Data)
 all_res$Modality <- factor(x = all_res$Modality,
@@ -293,7 +267,7 @@ all_plots <- ggplot(data = all_res,
   guides(color = guide_legend(nrow = 3)) +
   scale_x_discrete(limits = unique(all_res$Modality),
                    labels = c("CNV.RF", "MiRNA.RF", "RNA.SVM", "Mutation.SVM", "Meta.LASSO")) +
-  facet_wrap(~Data, ncol = 1)
+  facet_wrap(~ Data, ncol = 1)
 
 print(all_plots)
 

@@ -41,19 +41,3 @@ predict.myglm <- function(object, data) {
   tmp <- predict(object = object$model, newdata = as.data.frame(data), type = "response")
   return(as.vector(tmp))
 }
-
-# Test lasso
-if (FALSE) {
-  # Generate some example data
-  set.seed(123)
-  n <- 100  # Number of observations
-  p <- 2   # Number of predictors
-
-  # Create predictor matrix (X) and binary outcome (y)
-  x <- matrix(rnorm(n * p), nrow = n, ncol = p)
-  y <- rbinom(n, 1, 0.5)  # Binary outcome (0 or 1)
-  x_pred <- matrix(rnorm(n * p), nrow = n, ncol = p)
-  tmp <- mylasso(x = x, y = y)
-  pred_tmp <- predict(object = tmp, data = x_pred)
-
-}
