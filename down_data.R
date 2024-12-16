@@ -4,10 +4,11 @@
 library(OpenML)
 library(farff)
 
+# Set your working directory to the project directory.
 
-load(file.path(this.path::this.dir(), "datset_ids.RData"))
-dir.create(file.path(this.path::this.dir(), "data"), showWarnings = FALSE)
-setwd(file.path(this.path::this.dir(), "data"))
+load("datset_ids.RData")
+dir.create("data", showWarnings = FALSE)
+setwd("data")
 getwd()
 nams <- c("BLCA", "HNSC")
 
