@@ -22,9 +22,3 @@ predict.mysvm <- function(object, data) {
   # return(svm_pred)
 }
 
-# Test
-if(FALSE) {
-  mysvm_model <- mysvm(x = training_clin[ , -1], y = target_df_training$mutation)
-  tmp <- predict(object = mysvm_model, data = testing_clin[ , colnames(mysvm_model$model$SV)])
-
-}
