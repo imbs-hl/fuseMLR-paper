@@ -18,7 +18,7 @@ predict.mysvm <- function(object, data) {
                       probability = 1)
                       # probability = 0)
   svm_pred <- attr(svm_pred, "probabilities")
-  return(svm_pred[ , 2L])
+  return(1 - svm_pred[ , 1L])
   # return(svm_pred)
 }
 

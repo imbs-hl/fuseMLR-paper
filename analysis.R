@@ -207,7 +207,8 @@ for (nam in 1:length(nams)) {
 
 # Performance estimation
 #TODO: remove this line later
-result_dir <- "/imbs/home/fouodo/projects/interconnect-publications/fuseMLR-paper/results"
+# result_dir <- "/imbs/home/fouodo/projects/interconnect-publications/fuseMLR-paper/results"
+result_dir <- file.path(project_dir, "results")
 all_res_list <- list()
 for (nam in 1:length(nams)) {
   message(sprintf("Omics data: %s\n", nams[nam]))
@@ -221,9 +222,8 @@ for (nam in 1:length(nams)) {
     )
     tmp_res <- tmp_res$pred_truth
     brier_score <- sapply(3:7, function (layer) {
-      tmp_brier1 <- mean((tmp_res[ , layer] - tmp_res[ , 8])^2)
-      tmp_brier2 <- mean(((1- tmp_res[ , layer]) - tmp_res[ , 8])^2)
-      return(min(tmp_brier1, tmp_brier2))
+      bs <- mean(((1- tmp_res[ , layer]) - tmp_res[ , 8])^2)
+      return(bs)
     })
     names(brier_score) <- names(tmp_res)[3:7]
     return(brier_score)
@@ -239,7 +239,6 @@ for (nam in 1:length(nams)) {
 all_res <- all_res_list
 all_res <- do.call(what = "rbind", args = all_res)
 all_res$Method <- ""
-# all_res[all_res$Modality == "Clinical", "Method"] <- "RF"
 all_res[all_res$Modality == "CNV", "Method"] <- "RF"
 all_res[all_res$Modality == "MiRNA", "Method"] <- "RF"
 all_res[all_res$Modality == "RNA", "Method"] <- "SVM"
