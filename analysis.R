@@ -206,8 +206,6 @@ for (nam in 1:length(nams)) {
 
 
 # Performance estimation
-#TODO: remove this line later
-# result_dir <- "/imbs/home/fouodo/projects/interconnect-publications/fuseMLR-paper/results"
 result_dir <- file.path(project_dir, "results")
 all_res_list <- list()
 for (nam in 1:length(nams)) {
