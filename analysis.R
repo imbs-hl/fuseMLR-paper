@@ -45,9 +45,9 @@ for (nam in 1:length(nams)) {
     testing_cnv <- data.frame(cbind(ID = target_df$ID[testing_index]),
                               cnvdata[testing_index, ])
     testing_mirna <- data.frame(cbind(ID = target_df$ID[testing_index]),
-                                mirnadata[testing_index, ])
+                                scale(mirnadata[testing_index, ]))
     testing_rna <- data.frame(cbind(ID = target_df$ID[testing_index]),
-                              rnadata[testing_index, ])
+                              scale(rnadata[testing_index, ]))
     testing_mutation <- data.frame(cbind(ID = target_df$ID[testing_index]),
                                    mutationdata[testing_index, ])
     
@@ -58,9 +58,9 @@ for (nam in 1:length(nams)) {
     training_cnv <- data.frame(cbind(ID = target_df$ID[ - testing_index]),
                                cnvdata[ - testing_index, ])
     training_mirna <- data.frame(cbind(ID = target_df$ID[- testing_index]),
-                                 mirnadata[- testing_index, ])
+                                 scale(mirnadata[- testing_index, ]))
     training_rna <- data.frame(cbind(ID = target_df$ID[- testing_index]),
-                               rnadata[- testing_index, ])
+                               scale(rnadata[- testing_index, ]))
     training_mutation <- data.frame(cbind(ID = target_df$ID[- testing_index]),
                                     mutationdata[- testing_index, ])
     
@@ -98,9 +98,11 @@ for (nam in 1:length(nams)) {
                      varsel_fct = "Boruta",
                      varsel_param = list(num.trees = 2500L,
                                          probability = TRUE),
-                     lrner_package = "ranger",
-                     lrn_fct = "ranger",
-                     param_train_list = list(probability = TRUE),
+                     lrner_package = NULL,
+                     lrn_fct = "mysvm",
+                     param_train_list = list(type = 'C-classification',
+                                             kernel = 'radial',
+                                             probability = TRUE),
                      param_pred_list = list(),
                      na_action = "na.keep")
     
@@ -128,11 +130,9 @@ for (nam in 1:length(nams)) {
                      varsel_fct = "Boruta",
                      varsel_param = list(num.trees = 2500L,
                                          probability = TRUE),
-                     lrner_package = NULL,
-                     lrn_fct = "mysvm",
-                     param_train_list = list(type = 'C-classification',
-                                             kernel = 'radial',
-                                             probability = TRUE),
+                     lrner_package = "ranger",
+                     lrn_fct = "ranger",
+                     param_train_list = list(probability = TRUE),
                      param_pred_list = list(),
                      na_action = "na.keep")
     
@@ -232,15 +232,14 @@ for (nam in 1:length(nams)) {
                                 id.vars = "Data",
                                 variable.name = "Modality")
   all_res_list[[nam]] <- perf_long
-  
 }
 all_res <- all_res_list
 all_res <- do.call(what = "rbind", args = all_res)
 all_res$Method <- ""
 all_res[all_res$Modality == "CNV", "Method"] <- "RF"
-all_res[all_res$Modality == "MiRNA", "Method"] <- "RF"
+all_res[all_res$Modality == "MiRNA", "Method"] <- "SVM"
 all_res[all_res$Modality == "RNA", "Method"] <- "SVM"
-all_res[all_res$Modality == "Mutation", "Method"] <- "SVM"
+all_res[all_res$Modality == "Mutation", "Method"] <- "RF"
 all_res[all_res$Modality == "Meta_layer", "Method"] <- "LASSO"
 all_res$Method <- factor(x = all_res$Method, levels = c("RF", "SVM", "LASSO"))
 
@@ -263,7 +262,7 @@ all_plots <- ggplot(data = all_res,
         legend.direction = "horizontal") +
   guides(color = guide_legend(nrow = 3)) +
   scale_x_discrete(limits = unique(all_res$Modality),
-                   labels = c("CNV.RF", "MiRNA.RF", "RNA.SVM", "Mutation.SVM", "Meta.LASSO")) +
+                   labels = c("CNV.RF", "Mutation.RF", "MiRNA.SVM", "RNA.SVM", "Meta.LASSO")) +
   facet_wrap(~ Data, ncol = 1)
 
 print(all_plots)
