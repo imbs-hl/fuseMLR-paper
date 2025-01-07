@@ -67,7 +67,7 @@ for (nam in 1:length(nams)) {
     # ==========================================================================
     # fuseMLR
     # ==========================================================================
-    #
+    start_time <- proc.time()
     # Training
     training <- createTraining(id = "training",
                                ind_col = "ID",
@@ -180,9 +180,12 @@ for (nam in 1:length(nams)) {
     
     # Predict
     predictions <- predict(object = training, testing = testing)
+    end_time <- proc.time()
+    elapsed_time <- end_time - start_time
     pred_truth <- data.frame(cbind(Multiomics = nam,
                                    predictions$predicted_values,
-                                   Truth = target_df_testing$sex
+                                   Truth = target_df_testing$sex,
+                                   Runtime = elapsed_time["elapsed"]
     ))
     # Resume results
     fold_list <- list(training = training,
@@ -262,7 +265,7 @@ all_plots <- ggplot(data = all_res,
         legend.direction = "horizontal") +
   guides(color = guide_legend(nrow = 3)) +
   scale_x_discrete(limits = unique(all_res$Modality),
-                   labels = c("CNV.RF", "Mutation.RF", "MiRNA.SVM", "RNA.SVM", "Meta.LASSO")) +
+                   labels = c("CNV.RF", "Mutation.RF", "MiRNA.SVM", "mRNA.SVM", "Meta.LASSO")) +
   facet_wrap(~ Data, ncol = 1)
 
 print(all_plots)
