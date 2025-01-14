@@ -213,26 +213,30 @@ result_dir <- file.path(project_dir, "results")
 all_res_list <- list()
 for (nam in 1:length(nams)) {
   message(sprintf("Omics data: %s\n", nams[nam]))
+  tmp_res <- NULL
   perf_list <- lapply(X = 1L:10L, FUN = function(current_fold){
     # Save the fold
-    tmp_res <- readRDS(
+    tmp_res <<- readRDS(
       file.path(result_dir,
                 sprintf("%s_fold%02d.rds",
                         nams[nam],
                         current_fold))
     )
     tmp_res <- tmp_res$pred_truth
-    brier_score <- sapply(3:7, function (layer) {
-      bs <- mean(((1- tmp_res[ , layer]) - tmp_res[ , 8])^2)
+    brier_score_time <- sapply(3L:7L, function (layer) {
+      bs <- mean(((1L - tmp_res[ , layer]) - tmp_res[ , 8L])^2L)
       return(bs)
     })
-    names(brier_score) <- names(tmp_res)[3:7]
-    return(brier_score)
+    brier_score_time <- c(brier_score_time, tmp_res$Runtime[1L] / 60L)
+    names(brier_score_time) <- c(names(tmp_res)[3L:7L], "Runtime")
+    return(c(brier_score_time))
   })
   perf_list <- as.data.table(do.call(what = "rbind", perf_list))
+  # print(sprintf("Runtime %s: %s.\n", nams[nam], perf_list$Runtime))
+  # perf_list$Runtime <- NULL
   perf_list$Data <- nams[nam]
   perf_long <- data.table::melt(data = perf_list,
-                                id.vars = "Data",
+                                id.vars = c("Data", "Runtime"),
                                 variable.name = "Modality")
   all_res_list[[nam]] <- perf_long
 }
@@ -243,7 +247,7 @@ all_res[all_res$Modality == "CNV", "Method"] <- "RF"
 all_res[all_res$Modality == "MiRNA", "Method"] <- "SVM"
 all_res[all_res$Modality == "RNA", "Method"] <- "SVM"
 all_res[all_res$Modality == "Mutation", "Method"] <- "RF"
-all_res[all_res$Modality == "Meta_layer", "Method"] <- "LASSO"
+all_res[all_res$Modality == "meta_layer", "Method"] <- "LASSO"
 all_res$Method <- factor(x = all_res$Method, levels = c("RF", "SVM", "LASSO"))
 
 # Plot results
@@ -265,7 +269,7 @@ all_plots <- ggplot(data = all_res,
         legend.direction = "horizontal") +
   guides(color = guide_legend(nrow = 3)) +
   scale_x_discrete(limits = unique(all_res$Modality),
-                   labels = c("CNV.RF", "Mutation.RF", "MiRNA.SVM", "mRNA.SVM", "Meta.LASSO")) +
+                   labels = c("CNV.RF", "miRNA.SVM", "mRNA.SVM", "Mutation.RF", "Meta.LASSO")) +
   facet_wrap(~ Data, ncol = 1)
 
 print(all_plots)
@@ -273,3 +277,7 @@ print(all_plots)
 ggsave(filename = file.path(result_dir, "boxplotgender.pdf"),
        plot = all_plots,
        width = 2.75, height = 4)
+
+# Mean runtimes
+all_res[ , .(mean_time = mean(Runtime)), by = Data]
+
