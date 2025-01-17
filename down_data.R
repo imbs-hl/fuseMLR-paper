@@ -1,17 +1,6 @@
-# install.packages("OpenML")
-# install.packages("farff")
-# install.packages("readr")
-
-library(OpenML)
-library(farff)
-library(readr)
-
 # Set your working directory to the project directory.
-
+setwd(data_dir)
 load("datset_ids.RData")
-dir.create("data", showWarnings = FALSE)
-setwd("data")
-getwd()
 nams <- c("BLCA", "HNSC")
 
 for(nam in nams){
@@ -29,5 +18,5 @@ for(nam in nams){
   rnadata <- dat[,blockinds[[5]]]
   surdata <- dat[,1:3]
   save(clindata, cnvdata, mirnadata,mutationdata, rnadata,surdata,
-       file = paste(nam,".RData", sep = ""))
+       file = paste(nam, ".RData", sep = ""))
 }

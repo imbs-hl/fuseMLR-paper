@@ -1,23 +1,3 @@
-# devtools::install_github("imbs-hl/fuseMLR")
-# install.packages("ranger")
-# install.packages("glmnet")
-# install.packages("e1071")
-
-library(fuseMLR)
-library(ranger)
-library(glmnet)
-library(e1071)
-library(data.table)
-library(ggplot2)
-
-# Result directory
-project_dir <- "~/projects/interconnect-publications/fuseMLR-paper"
-dir.create(path = file.path(project_dir, "results"),
-           recursive = TRUE,
-           showWarnings = FALSE)
-result_dir <- file.path(project_dir, "results")
-data_dir <- file.path(project_dir, "data")
-
 source(file.path(project_dir, "mylasso.R"))
 source(file.path(project_dir, "mysvm.R"))
 

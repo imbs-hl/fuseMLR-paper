@@ -1,15 +1,3 @@
-# if (!require("BiocManager", quietly = TRUE))
-#   install.packages("BiocManager")
-# BiocManager::install("mirbase.db")
-
-# BiocManager::install('grimbough/biomaRt')
-
-# To retrieve chromosome information from miRNA
-library(mirbase.db) 
-# To retrieve chromosome from mRNA
-library(biomaRt)
-
-# Functions to retrieve chromosomes from modality data.
 # Function to retrieve the number of miRNA samples from chromosome X.
 mirna_chr <- function (data = mirnadata) {
   x <- mirbaseCHR
