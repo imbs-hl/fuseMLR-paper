@@ -1,6 +1,3 @@
-source(file.path(project_dir, "mylasso.R"))
-source(file.path(project_dir, "mysvm.R"))
-
 nams <- c("BLCA", "HNSC")
 seeds <- c(422852, 342303)
 
