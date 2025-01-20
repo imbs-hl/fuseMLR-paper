@@ -9,4 +9,4 @@ Code to reproduce results of the case study presented in paper "fuseMLR: An R pa
 
 3 - Use `analysis.R` to perform the late integration prediction modeling.
 
-4 - Use `sex-chr-check.R` to get the number of markers sampled from the X-chromosome for each data-modality.
+4 - Use `sex-chr-check.R` to get the number of markers sampled from the X chromosome for each data-modality.
