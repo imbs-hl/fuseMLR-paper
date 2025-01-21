@@ -104,8 +104,9 @@ chrnams <- matrix(data = NA, nrow = 2, ncol = 4, byrow = TRUE,
 nvars <- matrix(data = NA, nrow = 2, ncol = 4, byrow = TRUE,
                 dimnames = list(c("BLCA", "HNSC"),
                                 c("CNV", "miRNA", "mRNA", "Mutation")))
-# This code may need to be executed multiple times, as the server for retrieving
-# chromosome information might be temporarily unavailable.
+# This code may need to be executed several times, as the server for retrieving
+# chromosome information might be temporarily unavailable, if it is accessed by 
+# multiple users simultaneously.
 for (nam in 1:length(nams)) {
   message(sprintf("Omics data: %s\n", nams[nam]))
   load(file.path(data_dir, sprintf("%s.RData", nams[nam])))

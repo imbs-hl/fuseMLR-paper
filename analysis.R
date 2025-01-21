@@ -240,7 +240,7 @@ all_plots <- ggplot(data = all_res,
                                   colour = Modality)) +
   geom_boxplot() +
   ylab("log10(BS)") +
-  xlab("Modality and Method") +
+  xlab("Modality and learner") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
         legend.position = "none",
         legend.direction = "horizontal") +
@@ -256,5 +256,5 @@ ggsave(filename = file.path(result_dir, "boxplotgender.pdf"),
        width = 2.75, height = 4)
 
 # Mean runtimes
-all_res[ , .(mean_time = mean(Runtime)), by = Data]
+print(all_res[ , .(mean_time = mean(Runtime)), by = Data])
 
