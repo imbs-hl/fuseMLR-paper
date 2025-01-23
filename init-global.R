@@ -5,6 +5,7 @@
 # install.packages("readr")
 # install.packages("fuseMLR")
 # install.packages("ranger")
+# install.packages("Boruta")
 # install.packages("glmnet")
 # install.packages("e1071")
 # install.packages("data.table")
@@ -12,8 +13,9 @@
 # if (!require("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 # BiocManager::install("mirbase.db")
-# Install biomRt from development version. You need to install the "png" package
-# (install.packages("png")) as well.
+# Install biomaRt from development version. Packages "png" and "remotes" required.
+# install.packages("png").
+# BiocManager::install("remotes")
 # BiocManager::install('grimbough/biomaRt')
 
 library(OpenML)
@@ -21,6 +23,7 @@ library(farff)
 library(readr)
 library(fuseMLR)
 library(ranger)
+library(Boruta)
 library(glmnet)
 library(e1071)
 library(data.table)

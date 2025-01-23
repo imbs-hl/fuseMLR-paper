@@ -32,6 +32,11 @@ for(nam in nams){
   mirnadata <- dat[,blockinds[[3]]]
   mutationdata <- dat[,blockinds[[4]]]
   rnadata <- dat[,blockinds[[5]]]
+  rownames(clindata) <- NULL
+  rownames(cnvdata) <- NULL
+  rownames(mirnadata) <- NULL
+  rownames(mutationdata) <- NULL
+  rownames(rnadata) <- NULL
   surdata <- dat[,1:3]
   save(clindata, cnvdata, mirnadata,mutationdata, rnadata,surdata,
        file = paste(nam, ".RData", sep = ""))
