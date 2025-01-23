@@ -14,7 +14,7 @@
 #   install.packages("BiocManager")
 # BiocManager::install("mirbase.db")
 # Install biomaRt from development version. Packages "png" and "remotes" required.
-# install.packages("png").
+# install.packages("png")
 # BiocManager::install("remotes")
 # BiocManager::install('grimbough/biomaRt')
 
