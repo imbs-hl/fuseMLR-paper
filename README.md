@@ -1,5 +1,12 @@
 # fuseMLR-paper
-Code to reproduce results of the case study presented in paper "fuseMLR: An R package for integrative prediction modeling of multi-omics data".
+
+Code to reproduce results in simulation and case study presented in paper "fuseMLR: An R package for integrative prediction modeling of multi-omics data".
+
+## Simulation
+Follow the steps below to reproduce the results presented in the simulation section.
+
+## Case study
+To reproduce the case study results, perform the following steps.
 
 0 - Use `https://github.com/imbs-hl/fuseMLR-paper.git` to clone this repository or download and save it on your local computer.
 
