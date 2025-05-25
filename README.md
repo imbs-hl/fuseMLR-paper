@@ -4,6 +4,7 @@ Code to reproduce results in simulation and case study presented in paper "fuseM
 
 ## Simulation
 Follow the steps below to reproduce the results presented in the simulation section.
+To reproduce the simulation study results, perform the following steps
 
 ## Case study
 To reproduce the case study results, perform the following steps.
