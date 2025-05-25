@@ -4,8 +4,6 @@
 ##################################################
 
 # read simulation data
-# read_sim_data(sim_data_file[c(1,13, 101, 102, 103, 137, 138, 139, 170, 401, 402, 403, 
-#                               437, 438, 439, 701, 713, 801, 813)])
 
 read_sim_data(sim_data_file)
 # function
