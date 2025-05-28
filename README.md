@@ -16,7 +16,7 @@ conflicts between objects.
 
 The analysis proceeds as follows: First, multi-omics data are simulated. Then,
 the data are prepared depending on the integration strategy—either late integration
-(fuseMLR) or early integration (blockForest). Finally, various prediction modells
+(fuseMLR) or early integration (Random Forest and blockForest). Finally, various prediction modells
 are trained and evaluated.
 
 Steps:
@@ -33,35 +33,19 @@ Steps:
 
 `03_2_create_perform_wmean.R` - Evaluates the performance of the weighted mean meta-learner.
 
-`04_1_create_pred_mean.R` - Trains prediction model using the simple mean meta-learner.
+`04_1_create_pred_lasso.R` - Trains prediction model using Lasso meta-learner.
 
-`04_2_create_perform_mean.R` - Evaluates the performance of the simple mean meta-learner.
+`04_2_create_perform_lasso.R` - Evaluates the performance of Lasso meta-learner.
 
-`05_1_create_pred_best.R` - Trains prediction model using the best modality selection meta-learner.
+`05_1_create_pred_blockForest_early.R` - Trains prediction model using blockForest for early integration.
 
-`05_2_create_perform_best.R` - Evaluates the performance of the best modality selection meta-learner.
+`05_2_create_perform_blockForest_early.R` - Evaluates the performance of blockForest for early integration.
 
-`06_1_create_pred_cobra.R` - Trains prediction model using the COBRA meta-learner.
+`06_1_create_pred_rf_early.R` - Trains prediction model using random forest for early integration.
 
-`06_2_create_perform_cobra.R` - Evaluates the performance of COBRA meta-learner.
+`06_2_create_perform_rf_early.R` - Evaluates the performance of random forest for early integration.
 
-`07_1_create_pred_rf.R` - Trains prediction model using random forest meta-learner (late integration).
-
-`07_2_create_perform_rf.R` - Evaluates the performance of random forest meta-learner (late integration).
-
-`08_1_create_pred_lasso.R` - Trains prediction model using Lasso meta-learner.
-
-`08_2_create_perform_lasso.R` - Evaluates the performance of Lasso meta-learner.
-
-`09_1_create_pred_blockForest_early.R` - Trains prediction model using blockForest for early integration.
-
-`09_2_create_perform_blockForest_early.R` - Evaluates the performance of blockForest for early integration.
-
-`10_1_create_pred_rf_early.R` - Trains prediction model using random forest for early integration.
-
-`10_2_create_perform_rf_early.R` - Evaluates the performance of random forest for early integration.
-
-`11_create_plots.R` - Generates plots for visualization of the results. Stores the output in img.
+`07_create_plots.R` - Generates plots for visualization of the results. Stores the output in img.
 
 ## Case study
 To reproduce the case study results, perform the following steps.
