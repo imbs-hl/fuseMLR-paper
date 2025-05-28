@@ -29,6 +29,8 @@ result_rf_dir = file.path(results_dir, "rf/")
 result_blockForest_dir = file.path(results_dir, "blockForest/")
 
 # create dir
+dir.create(file.path(data_dir), showWarnings = FALSE)
+dir.create(file.path(img_dir), showWarnings = FALSE)
 dir.create(file.path(data_dir, "InterSIM"), showWarnings = FALSE)
 dir.create(file.path(data_dir, "InterSIM_split"), showWarnings = FALSE)
 dir.create(file.path(data_dir, "InterSIM_split_early"), showWarnings = FALSE)
