@@ -22,14 +22,7 @@ create_boxplot_time <- function(scenario_list, scenario_names,
       df <- dataframes_list[[i]]
       df_name <- names(dataframes_list)[i]
       
-      # data for _m: methylierung, geneexpr, proteinexpr, MW
-      if (grepl("_m$", df_name)) {
-        boxplot_data <- rbind(boxplot_data, data.frame(
-          score = df$time,
-          model = "Meta.M"
-        ))
-      }
-      
+
       # data for meta_layer 
       if (grepl("_wm", df_name)) {
         boxplot_data <- rbind(boxplot_data, data.frame(
@@ -38,25 +31,6 @@ create_boxplot_time <- function(scenario_list, scenario_names,
         ))
       }
 
-        if (grepl("_cobra_epsilon", df_name)) {
-          boxplot_data <- rbind(boxplot_data, data.frame(
-            score = df$time,
-            model = "Meta.COBRA"
-          ))
-        }
-
-        if (grepl("_mia", df_name)) {
-          boxplot_data <- rbind(boxplot_data, data.frame(
-            score = df$time,
-            model = "Meta.RF"
-          ))
-        }
-        if (grepl("_best", df_name)) {
-          boxplot_data <- rbind(boxplot_data, data.frame(
-            score = df$time,
-            model = "Meta.Best"
-          ))
-        }
       if (grepl("_lasso", df_name)) {
         boxplot_data <- rbind(boxplot_data, data.frame(
           score = df$time,
@@ -79,11 +53,9 @@ create_boxplot_time <- function(scenario_list, scenario_names,
     }
     
  
-    colors <- c( "#e7298a", "#66a61e", 
-                "#e6ab02","#a6cee3", "#b2df8a", "#fc9272", "#b3b3b3", "#e78ac3" )
+    colors <- c("#1b9e77", "#d95f02", "#7570b3", "#e7298a" )
    
-    model_order <- c("Meta.M",
-                     "Meta.WM", "Meta.COBRA",  "Meta.RF", "Meta.Best", "Meta.Lasso",
+    model_order <- c( "Meta.WM",  "Meta.Lasso",
                      "Early.RF", "Early.blockF")
     
     boxplot_data$model <- factor(boxplot_data$model, levels = model_order)
@@ -106,7 +78,6 @@ create_boxplot_time <- function(scenario_list, scenario_names,
         axis.line = element_line()
       ) +
       labs(
-        #title = "Boxplot der Kategorien",
         y = "Time in seconds",
         x = "Learner"
       )

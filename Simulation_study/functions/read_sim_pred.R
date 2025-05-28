@@ -18,12 +18,6 @@ read_sim_pred <- function(src_dir, pattern_imp, pattern_exp) {
     
     # Identify the scenario and create a new name 
     
-    # Scenario Sz1
-    if (grepl("Sz1", file)) {
-      sz <- "Sz1"
-      new_name <- paste0("Sz1_0_0_0_", pattern_exp)
-    }
-    
     # Scenario Sz2
     if (grepl("Sz2", file)) {
       sz <- "Sz2"
@@ -42,12 +36,6 @@ read_sim_pred <- function(src_dir, pattern_imp, pattern_exp) {
     if (grepl("Sz4", file)) {
       sz <- "Sz4"
       new_name <- paste0("Sz4_20_20_20_", pattern_exp)
-    }
-    
-    # Scenario Sz5
-    if (grepl("Sz5", file)) {
-      sz <- "Sz5"
-      new_name <- paste0("Sz5_20_NULL_NULL_", pattern_exp)
     }
     
     # Assign the data to the global environment using the new name

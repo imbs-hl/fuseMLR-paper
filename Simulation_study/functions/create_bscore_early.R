@@ -46,7 +46,7 @@ create_bs_early <- function(szenarien_namen, suffix, output_folder) {
     # create output-file
     name_parts <- strsplit(sz_name, "_")[[1]]
     # Extract the scenario and NA components from the name
-    scenario <- name_parts[1]  # z.B. "Sz1"
+    scenario <- name_parts[1] 
   
     if(scenario == "Sz2" | scenario == "Sz3"){
       effect_part = paste0(name_parts[2], "_", name_parts[3],"_", name_parts[4])
