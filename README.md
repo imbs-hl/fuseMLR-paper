@@ -16,8 +16,7 @@ conflicts between objects.
 
 The analysis proceeds as follows: First, multi-omics data are simulated. Then,
 the data are prepared depending on the integration strategy—either late integration
-(fuseMLR) or early integration (Random Forest and blockForest). Finally, various prediction modells
-are trained and evaluated.
+(fuseMLR) or early integration (Random Forest and blockForest). Finally, various prediction models are trained and evaluated.
 
 Steps:
 
