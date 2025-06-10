@@ -1,4 +1,16 @@
-
+# Make sure the required packages are installed or use the following command
+# to install them if required.
+# install.packages("InterSIM")
+# install.packages("fs")
+# install.packages("here")
+# install.packages("caret")
+# install.packages("ranger")
+# install.packages("Boruta")
+# install.packages("dplyr")
+# install.packages("fuseMLR")
+# install.packages("UpSetR")
+# install.packages("glmnet")
+# install.packages("blockForest")
 # load packages
 library(InterSIM)
 library(fs)

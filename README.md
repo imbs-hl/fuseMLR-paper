@@ -6,21 +6,21 @@ Use `https://github.com/imbs-hl/fuseMLR-paper.git` to clone this repository or d
 
 ## Simulation
 
-To reproduce the simulation study results, perform the following steps.
+To reproduce the simulation study results, move to the directory `Simulation_study`, and perform the following steps.
 
-Each script works on its own and just needs to load `init.R` at the start, which
+Each script works on its own and needs to load `init.R` at the start, which
 loads all necessary packages and functions and defines paths.
 
 It is recommended to clear the workspace before running each script to avoid 
 conflicts between objects.
 
-The analysis proceeds as follows: First, multi-omics data are simulated. Then,
-the data are prepared depending on the integration strategy—either late integration
-(fuseMLR) or early integration (Random Forest and blockForest). Finally, various prediction models are trained and evaluated.
+The analysis follows a structured approach. First, multi-omics data—including methylation, gene expression, and protein abundance—are simulated for each scenario. We consider three scenarios based on the distribution of effects across data modalities: one with effects only in methylation, one with effects in both methylation and gene expression, and one with effects in all three modalities. We prepare data depending on the integration strategy — either late integration (fuseMLR) or early integration (Random Forest and blockForest). For each integration strategy, we train and assess the corresponding model.
 
-Steps:
+Running the following scripts reproduces the results as presented in the article.
 
-`init.R`- Loads all required libraries, defines file paths, and sources functions. This file must be sourced at the beginning of each script.
+`init.R`- This file is located in the directory `Simulation_study`. It loads all required libraries, defines file paths, and sources functions. This file must be sourced at the beginning of each script.
+
+The following files are located in `scripts`.
 
 `01_simulate_data.R` - Simulates various scenarios and stores the output in data/InterSIM/.
 
