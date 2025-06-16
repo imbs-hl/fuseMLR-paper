@@ -69,7 +69,7 @@ create_boxplots <- function(scenario_list, scenario_names,
       geom_boxplot() +
       scale_fill_manual(values = colors) +
       theme_minimal() +
-      scale_y_continuous(limits = c(0, 0.4)) +
+      # scale_y_continuous(limits = c(0, 0.4)) +
       theme(
         axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
         axis.text.y = element_text(size = 12),

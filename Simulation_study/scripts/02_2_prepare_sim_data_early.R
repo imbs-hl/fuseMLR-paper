@@ -10,7 +10,7 @@ rep = c(1:100)
 
 # no effect in protein expression
 for(r in rep){
-  print(paste0("Working on ", "2Scenario_", r,  "_20_20_0" ))
+  print(paste0("Working on ", "2 scenario_", r,  "_20_20_0" ))
   import.pfad <- paste0(out_sim_dir, paste0( "/2Szenario_", r,  "_20_20_0.rds"))
   data_imp <- readRDS(file = import.pfad)
   # # create data set 
@@ -44,7 +44,7 @@ for(r in rep){
 ##  Methylation only
 
 for(r in rep){
-  print(paste0("Working on ", "3Scenario_", r,  "_20_0_0" ))
+  print(paste0("Working on ", "3 scenario_", r,  "_20_0_0" ))
   import.pfad <- paste0(out_sim_dir, paste0( "/3Szenario_", r,  "_20_0_0.rds"))
   data_imp <- readRDS(file = import.pfad)
   # create data set 
@@ -78,7 +78,7 @@ for(r in rep){
 # Scenario: Independent effect in all three omics modalities.
 
 for(r in rep){
-  print(paste0("Working on ", "4Scenario_", r,  "_20_20_20" ))
+  print(paste0("Working on ", "4 scenario_", r,  "_20_20_20" ))
   import.pfad <- paste0(out_sim_dir, paste0( "/4Szenario_", r,  "_20_20_20.rds"))
   data_imp <- readRDS(file = import.pfad)
   # create data set 

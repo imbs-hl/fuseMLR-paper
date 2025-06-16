@@ -11,6 +11,7 @@
 # install.packages("UpSetR")
 # install.packages("glmnet")
 # install.packages("blockForest")
+# install.packages("MLmetrics")
 # load packages
 library(InterSIM)
 library(fs)
@@ -23,6 +24,7 @@ library(fuseMLR)
 library(UpSetR)
 library(glmnet)
 library(blockForest)
+library(MLmetrics)
 
 
 # define paths
@@ -82,6 +84,8 @@ source(file.path(functions_dir, "create_bscore.R"))
 source(file.path(functions_dir, "create_bscore_early.R"))
 source(file.path(functions_dir, "create_auc.R"))
 source(file.path(functions_dir, "create_auc_early.R"))
+source(file.path(functions_dir), "create_f1.R")
+source(file.path(functions_dir, "create_f1_early.R"))
 source(file.path(functions_dir, "read_sim_pred.R"))
 source(file.path(functions_dir, "mylasso.R"))
 source(file.path(functions_dir, "myInterSIM.R"))

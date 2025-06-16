@@ -65,7 +65,7 @@ create_boxplot_time <- function(scenario_list, scenario_names,
       geom_boxplot() +
       scale_fill_manual(values = colors) +
       theme_minimal() +
-      scale_y_continuous(limits = c(0, 70)) +
+      # scale_y_continuous(limits = c(0, 70)) +
       theme(
         #axis.text.x = element_text(angle = 45, hjust = 1),
         axis.text.x = element_text(angle = 45, hjust = 1, size = 12),

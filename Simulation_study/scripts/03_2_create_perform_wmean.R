@@ -20,6 +20,9 @@ create_auc(szenarien_namen = all_pred_namen, suffix = "wm",
                   output_folder = result_wmean_dir)
 
 
+# create F1 score
+create_f1(szenarien_namen = all_pred_namen, suffix = "wm", 
+           output_folder = result_wmean_dir)
 
 
 
