@@ -3,7 +3,7 @@
 #### Split Data to Train and Test (late integration)
 ##################################################
 
-rep = c(1:4)
+rep = c(1:100)
 
 
 # Scenario: One omics modality has no effect.

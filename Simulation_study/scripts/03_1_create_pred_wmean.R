@@ -90,6 +90,6 @@ data_name_list <- ls(pattern = "^Sz")
 
 
 create_pred_fuseMLR_wm(data_name_list = data_name_list, output_folder = result_wmean_dir,
-                       suffix = "wm", rep = 4, seed_values = seed_values,
+                       suffix = "wm", rep = 100, seed_values = seed_values,
                        ranger_param = ranger_param_prob)
 

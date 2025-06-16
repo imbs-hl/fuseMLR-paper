@@ -4,7 +4,7 @@
 ##################################################
 
 prop = c(0.50, 0.50)
-rep = c(1:4)
+rep = c(1:100)
 
 # Scenario : Only one omics modality has effects.
 # scenario simulates effect in just one modality.
