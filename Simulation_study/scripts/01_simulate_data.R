@@ -15,8 +15,8 @@ for(r in rep){
   set.seed(6704 + r)
   print(paste0("Working on " , "3 scenario_", r, "_20_0_0" ))
   sim.D <- myInterSIM(n.sample = 300, cluster.sample.prop = prop,
-                      delta.methyl = 0.2, delta.expr = 0, delta.protein = 0,
-                      p.DMP = 0.2, p.DEG = 0, p.DEP = 0,
+                      delta.methyl = 0.1, delta.expr = 0, delta.protein = 0,
+                      p.DMP = 0.1, p.DEG = 0, p.DEP = 0,
                       sigma.methyl = NULL, sigma.expr = NULL, sigma.protein = NULL,
                       cor.methyl.expr = NULL, cor.expr.protein = NULL,
                       do.plot=FALSE, sample.cluster=TRUE, feature.cluster=TRUE)
@@ -36,8 +36,8 @@ for(r in rep){
   set.seed(389 + r )
   print(paste0("Working on " , "2 scenario_", r,  "_20_20_0" ))
   sim.D <- myInterSIM(n.sample = 300, cluster.sample.prop = prop,
-                      delta.methyl = 0.2, delta.expr = 0.2, delta.protein = 0,
-                      p.DMP = 0.2, p.DEG = 0.2, p.DEP = 0,
+                      delta.methyl = 0.1, delta.expr = 0.1, delta.protein = 0,
+                      p.DMP = 0.1, p.DEG = 0.1, p.DEP = 0,
                       sigma.methyl = NULL, sigma.expr = NULL, sigma.protein = NULL,
                       cor.methyl.expr = NULL, cor.expr.protein = NULL,
                       do.plot=FALSE, sample.cluster=TRUE, feature.cluster=TRUE)
@@ -57,8 +57,8 @@ for(r in rep){
   set.seed(5621 + r)
   print(paste0("Working on ","4 scenario_",  r, "_20_20_20"))
   sim.D <- myInterSIM(n.sample = 300, cluster.sample.prop = prop,
-                      delta.methyl = 0.2, delta.expr = 0.2, delta.protein = 0.2,
-                      p.DMP = 0.2, p.DEG = 0.2, p.DEP = 0.2,
+                      delta.methyl = 0.1, delta.expr = 0.1, delta.protein = 0.1,
+                      p.DMP = 0.1, p.DEG = 0.1, p.DEP = 0.1,
                       sigma.methyl = NULL, sigma.expr = NULL, sigma.protein = NULL,
                       cor.methyl.expr = NULL, cor.expr.protein = NULL,
                       do.plot=FALSE, sample.cluster=TRUE, feature.cluster=TRUE)
