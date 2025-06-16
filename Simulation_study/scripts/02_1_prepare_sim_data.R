@@ -3,7 +3,7 @@
 #### Split Data to Train and Test (late integration)
 ##################################################
 
-rep = c(1:100)
+rep = c(1:4)
 
 
 # Scenario: One omics modality has no effect.
@@ -11,8 +11,8 @@ rep = c(1:100)
 # no effect in protein expression
 
 for(r in rep){
-  print(paste0("Working on ", "2 scenario_", r,  "_20_20_0" ))
-  import.pfad <- paste0(out_sim_dir, paste0("/2 scenario_", r,  "_20_20_0.rds"))
+  print(paste0("Working on ", "scenario_2", r,  "_20_20_0" ))
+  import.pfad <- paste0(out_sim_dir, paste0("/scenario_2", r,  "_20_20_0.rds"))
   data_imp <- readRDS(file = import.pfad)
   # data.frame with ids und y
   target_df <- data_imp$clustering.assignment
@@ -54,8 +54,8 @@ for(r in rep){
 ##  Methylation only
 
 for(r in rep){
-  print(paste0("Working on ", "3 scenario_", r,  "_20_0_0" ))
-  import.pfad <- paste0(out_sim_dir, paste0("/3Szenario_", r,  "_20_0_0.rds"))
+  print(paste0("Working on ", "scenario_3", r,  "_20_0_0" ))
+  import.pfad <- paste0(out_sim_dir, paste0("/scenario_3", r,  "_20_0_0.rds"))
   data_imp <- readRDS(file = import.pfad)
   # data.frame with ids und y
   target_df <- data_imp$clustering.assignment
@@ -98,8 +98,8 @@ for(r in rep){
 # Scenario: Independent effects in all three omics modalities.
 
 for(r in rep){
-  print(paste0("Working on ", "4 scenario_", r,  "_20_20_20" ))
-  import.pfad <- paste0(out_sim_dir, paste0("/4Szenario_", r,  "_20_20_20.rds"))
+  print(paste0("Working on ", "scenario_4", r,  "_20_20_20" ))
+  import.pfad <- paste0(out_sim_dir, paste0("/scenario_4", r,  "_20_20_20.rds"))
   data_imp <- readRDS(file = import.pfad)
   # data.frame with ids und y
   target_df <- data_imp$clustering.assignment
