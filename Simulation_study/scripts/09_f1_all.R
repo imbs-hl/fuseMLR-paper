@@ -103,7 +103,7 @@ f1_all_plots <- ggplot(data = f1_all_molten,
                                      y = f1,
                                      colour = Learner)) +
   geom_boxplot() +
-  ylab("F1 score") +
+  ylab("F score") +
   xlab("Learner") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
         legend.position = "none",

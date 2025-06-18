@@ -4,7 +4,7 @@
 
 
 create_boxplots <- function(scenario_list, scenario_names,
-                            output_folder, name) {
+                            output_dir, name) {
   
   idx_sc1 <- scenario_names
   dataframes_list <- scenario_list[idx_sc1]
@@ -85,7 +85,7 @@ create_boxplots <- function(scenario_list, scenario_names,
         y = "BS",
         x = "Modality and learner"
       )
-    ggsave(file.path(output_folder, name), plot = p,
+    ggsave(file.path(output_dir, name), plot = p,
            width = 8, height = 6)
     
     return(p)

@@ -11,7 +11,7 @@ calculate_brier <- function(pred, target) {
 }
 
 
-create_bs <- function(szenarien_namen, suffix, output_folder) {
+create_bs <- function(szenarien_namen, suffix, output_dir) {
   szenarien_namen <- szenarien_namen
   # for each scenario 
   for(szen_idx in 1:length(szenarien_namen)) {
@@ -59,7 +59,7 @@ create_bs <- function(szenarien_namen, suffix, output_folder) {
     }
     
     # path
-    path <- file.path(output_folder, scenario,  sz_name)
+    path <- file.path(output_dir, scenario,  sz_name)
     # save as .rds-Datei
     saveRDS(get(sz_name), file = paste0(path, ".rds"))
     

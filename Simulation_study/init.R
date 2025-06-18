@@ -28,9 +28,11 @@ library(MLmetrics)
 
 
 # define paths
+simulation_dir <- here()
 data_dir <- here("data")
 results_dir <- here("data_results")
 functions_dir <- here("functions")
+script_dir <- here("scripts")
 img_dir <- here("img")
 out_sim_dir = file.path(data_dir, "InterSIM/")
 out_sim_split_dir = file.path(data_dir, "InterSIM_split/")

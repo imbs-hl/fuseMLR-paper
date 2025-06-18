@@ -2,13 +2,25 @@
 ########## create AUC
 ###############################################
 
-create_auc <- function(szenarien_namen, suffix, output_folder) {
+#' Uses predicted probabilities and the observed values of the target variable 
+#' to estimate the AUC.
+#'
+#' @param szenarien_namen Name of the scenario of interest. 
+#' @param suffix Suffix indicating the method. 
+#' @param output_dir Directory where to save results. 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+create_auc <- function (szenarien_namen,
+                        suffix,
+                        output_dir) {
   szenarien_namen <- szenarien_namen
   
-  # for each scenario 
+  # For each scenario 
   for(szen_idx in 1:length(szenarien_namen)) {
-    
-    # scenario
+    # Scenario
     szenario_name <- szenarien_namen[szen_idx]
     daten_liste <-  mget(szenario_name, envir = .GlobalEnv)[[1]]
     
@@ -25,7 +37,6 @@ create_auc <- function(szenarien_namen, suffix, output_folder) {
       data <- daten_liste[[i]]$result
       target <- as.integer(data$disease == 1L)  # target (only for 0 and 1)
       
-
       auc_wert[i,] <- sapply(X = data[, c("methylierung", "geneexpr",
                                           "proteinexpr","meta_layer")],
                              FUN = function (my_pred) {
@@ -38,12 +49,12 @@ create_auc <- function(szenarien_namen, suffix, output_folder) {
                              })
       
     }
-    # rename scores
+    # Rename scores
     sz_name <- paste0(gsub("pred", "auc", szenario_name), "_", suffix)
     assign(sz_name, auc_wert)
     
     ###########################################################
-    # create output-file
+    # Create output-file
     name_parts <- strsplit(sz_name, "_")[[1]]
     # Extract the scenario and NA components from the name
     scenario <- name_parts[1] 
@@ -53,9 +64,7 @@ create_auc <- function(szenarien_namen, suffix, output_folder) {
       scenario = file.path(scenario, effect_part)
     }
     
-    # path
-    path <- file.path(output_folder, scenario,  sz_name)
-    # save as .rds-Datei 
+    path <- file.path(output_dir, scenario,  sz_name)
     saveRDS(get(sz_name), file = paste0(path, ".rds"))
     
     message(paste("auc: ", sz_name, "is saved in" , paste0(path, ".rds")))
