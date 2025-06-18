@@ -28,7 +28,7 @@ library(MLmetrics)
 
 
 # define paths
-simulation_dir <- here()
+simulation_dir <- here("01-simulation-study")
 data_dir <- here("data")
 results_dir <- here("data_results")
 functions_dir <- here("functions")

@@ -36,7 +36,7 @@ library(mirbase.db)
 library(biomaRt)
 
 # Set the absolute path to your project directory.
-case_study_dir <- here()
+case_study_dir <- here("02-case-study")
 data_dir <- file.path(case_study_dir, "data")
 result_dir <- file.path(case_study_dir, "results")
 dir.create(path = data_dir, recursive = TRUE, showWarnings = FALSE)
