@@ -92,6 +92,6 @@ data_name_list <- ls(pattern = "^Sz")
 create_pred_fuseMLR_lasso(data_name_list = data_name_list,
                           output_dir = result_lasso_dir,
                           suffix = "lasso",
-                          rep = 1,
+                          rep = 100,
                           seed_values = seed_values,
                           ranger_param = ranger_param_prob)

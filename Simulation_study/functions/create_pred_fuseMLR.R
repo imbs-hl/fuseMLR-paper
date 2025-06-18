@@ -3,12 +3,17 @@
 ###########################################
 
 
-create_pred_fuseMLR <- function(entities, ranger_param, meta_lrn_id,
-                           lrn_fct, meta_lrn_id_pram, meta_lrn_param_list, meta_l_na_rm, sd
-                           ){
-  
+create_pred_fuseMLR <- function (entities,
+                                 ranger_param,
+                                 meta_lrn_id,
+                                 lrn_fct,
+                                 meta_lrn_id_pram,
+                                 meta_lrn_param_list,
+                                 meta_l_na_rm,
+                                 sd
+){
   # convert 1,2 to 0,1
-  # save as factor, because classifivcation problem
+  # Save as factor, because classifivcation problem
   entities$training$target$disease <- as.factor(as.integer(entities$training$target$disease) - 1 )
   entities$testing$target$disease <- as.factor(as.integer(entities$testing$target$disease) - 1)
   
@@ -18,7 +23,7 @@ create_pred_fuseMLR <- function(entities, ranger_param, meta_lrn_id,
                            target = "disease",
                            target_df = entities$training$target,
                            problem_type = "classification"
-                           )
+  )
   #print(training)
   # initiate layers
   tl_ge <- TrainLayer$new(id = "geneexpr",
@@ -40,12 +45,7 @@ create_pred_fuseMLR <- function(entities, ranger_param, meta_lrn_id,
   train_data_me <- TrainData$new(id = "methylierung",
                                  train_layer = tl_me,
                                  data_frame = entities$training$methylation)
-  # print(train_data_ge)
-  # training$upset(order.by = "freq")
-  # train_data_me$getData()
-  
   # Learner Parameter
-
   lrner_ge <- Lrner$new(id = "ranger",
                         package = "ranger",
                         lrn_fct = "ranger",
@@ -72,15 +72,14 @@ create_pred_fuseMLR <- function(entities, ranger_param, meta_lrn_id,
   set.seed(sd)
   # 
   disease <- training$getTargetValues()$disease
-  # without varselection
+  # Without varselection
   trained <- training$train(resampling_method = "caret::createFolds",
                             resampling_arg = list(y = disease,
                                                   k = 10L),
                             use_var_sel = FALSE
                             
-                            )
+  )
   
- 
   ###########################################################################
   # Predicting 
   testing <- Testing$new(id = "testing", ind_col = "IDS")
@@ -99,10 +98,10 @@ create_pred_fuseMLR <- function(entities, ranger_param, meta_lrn_id,
   new_data_me <- TestData$new(id = "methylierung",
                               new_layer = nl_me,
                               data_frame = entities$testing$methylation)
- 
+  
   # predict with new data
   predictions <- training$predict(testing = testing)
-
+  
   
   # prediction 
   pred_values <- predictions$predicted_values
@@ -112,6 +111,6 @@ create_pred_fuseMLR <- function(entities, ranger_param, meta_lrn_id,
                        all.y = TRUE)
   
   actual_pred
-
+  
   
 }

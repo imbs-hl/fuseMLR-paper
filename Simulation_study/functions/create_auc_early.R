@@ -1,8 +1,13 @@
-################################################
-########## create AUC
-###############################################
-
-create_auc_early <- function(szenarien_namen, suffix, output_dir) {
+#' Uses predicted probabilities and the observed values of the target variable 
+#' to estimate the AUC for early integration approaches.
+#'
+#' @param szenarien_namen Name of the scenario of interest. 
+#' @param suffix Suffix indicating the method. 
+#' @param output_dir Directory where to save results. 
+#'
+create_auc_early <- function (szenarien_namen,
+                              suffix,
+                              output_dir) {
   szenarien_namen <- szenarien_namen
   
   # for each scenario 

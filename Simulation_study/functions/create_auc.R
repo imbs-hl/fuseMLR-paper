@@ -1,18 +1,10 @@
-################################################
-########## create AUC
-###############################################
-
 #' Uses predicted probabilities and the observed values of the target variable 
-#' to estimate the AUC.
+#' to estimate the AUC for late integration approaches.
 #'
 #' @param szenarien_namen Name of the scenario of interest. 
 #' @param suffix Suffix indicating the method. 
 #' @param output_dir Directory where to save results. 
 #'
-#' @return
-#' @export
-#'
-#' @examples
 create_auc <- function (szenarien_namen,
                         suffix,
                         output_dir) {
