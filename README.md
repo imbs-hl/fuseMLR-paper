@@ -6,7 +6,7 @@ Use `https://github.com/imbs-hl/fuseMLR-paper.git` to clone this repository or d
 
 ## Simulation
 
-To reproduce the simulation study results, move to the directory `01-simulation_study`, and perform the following steps.
+To reproduce the simulation study results, move to the directory `01-simulation-study`, and perform the following steps.
 
 Each script works on its own and needs to load `init.R` at the start, which
 loads all necessary packages and functions and defines paths.
@@ -18,11 +18,11 @@ The analysis follows a structured approach. First, multi-omics data—including 
 
 The following files are located in `scripts`.
 
-1 - Ensure your current directory is `01-simulation_study` and run the `init.R` file. The R packages listed in this file need to be installed. If it is not the case, use the instructions mentioned in the file to install the necessary packages. 
+1 - Ensure your current directory is `01-simulation-study` and run the `init.R` file. The R packages listed in this file need to be installed. If it is not the case, use the instructions mentioned in the file to install the necessary packages. 
 
 2 - Run the script `run_simulation.R`.
 
-3 - Search for results in the `img` subdirectory created in `01-simulation_study`.
+3 - Search for results in the `img` subdirectory created in `01-simulation-study`.
 
 
 ## Case study
