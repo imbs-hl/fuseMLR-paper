@@ -1,5 +1,5 @@
 rm(list = ls())
-source(file.path(simulation_dir, "init.R"))
+source("init.R")
 ##################################################
 #### Prediction Modeling
 #### Meta-Learner: Lasso

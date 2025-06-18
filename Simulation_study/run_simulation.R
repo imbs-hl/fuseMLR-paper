@@ -1,4 +1,4 @@
-source(file.path(simulation_dir, "init.R"))
+source("init.R")
 
 # Create data modalities
 source(file.path(script_dir, "01_simulate_data.R"))
