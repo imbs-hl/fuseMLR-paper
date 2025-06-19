@@ -85,8 +85,8 @@ auc_all_plots <- ggplot(data = auc_all_molten,
   guides(color = guide_legend(nrow = 3)) +
   # scale_x_discrete(limits = unique(all_res$Modality),
   #                  labels = c("CNV.RF", "miRNA.SVM", "mRNA.SVM", "Mutation.RF", "Meta.LASSO")) +
-  facet_wrap(~ Scenario, ncol = 2)
+  facet_wrap(~ Scenario, ncol = 3)
 
 ggsave(filename = file.path(img_dir, "auc.pdf"),
        plot = auc_all_plots,
-       width = 5, height = 5)
+       width = 5, height = 2.5)
