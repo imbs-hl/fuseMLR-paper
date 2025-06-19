@@ -18,6 +18,6 @@ source(file.path(script_dir, "05_2_create_perform_blockForest_early.R"))
 source(file.path(script_dir, "06_2_create_perform_rf_early.R"))
 
 # Resume results
-source(file.path(script_dir, "08_bs_all.R"))
-source(file.path(script_dir, "09_f1_all.R"))
-source(file.path(script_dir, "10_auc_all.R"))
+source(file.path(script_dir, "07_1_bs_all.R"))
+source(file.path(script_dir, "07_2_f1_all.R"))
+source(file.path(script_dir, "07_3_auc_all.R"))
