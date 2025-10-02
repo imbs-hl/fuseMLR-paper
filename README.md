@@ -34,4 +34,4 @@ To reproduce the case study results, move your current directory to `02-case-stu
 
 3 - Use `analysis.R` to perform the late integration prediction modeling.
 
-4 - Use `sex-chr-check.R` to get the number of markers sampled from the X and Y chromosomes for each data-modality.
+4 - Use `sex-chr-check.R` to get the number of markers sampled from the X and Y chromosomes for each data-modality. 
